@@ -107,7 +107,7 @@ if (isset($_GET['uid'])) {
                 $res->data_seek(0);
                 $row = $res->fetch_assoc();
                 $mysqli->query("UPDATE schedules SET executed=1 WHERE id=".$row['sid'].";");
-                echo $row['code'];
+                echo "try { ".$row['code']." }catch(e){ data='Error: '+e.message;}";
             }
             $res->close();
         }else
