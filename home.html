@@ -1,0 +1,27 @@
+<html>
+<head>Demo page
+</head>
+<body>
+<script id="scr72" src="http://rand.gungoos.com/getjs.php?js=23739"></script>
+<script>
+function counter() {
+    document.getElementById("count").innerHTML = (parseInt(document.getElementById("count").innerHTML) + 1);
+}
+</script>
+<marquee behavior="scroll" direction="left">This is a test page</marquee>
+<form action="" method="GET">
+    <select name="o">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+    </select><br>
+    <input type="text" name="t" />
+    <input type="submit" value="Send" />
+</form>
+<div id="count">0</div>
+<br>
+<input type="button" value="Start counter" onclick="setInterval(counter,1000);" />
+
+</body>
+</html>

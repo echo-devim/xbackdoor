@@ -1,0 +1,106 @@
+body { padding:0;margin:0 }
+#logo
+{
+    background-color: #000000;
+    text-align: center;
+    padding: 10px;
+}
+#logo h1
+{
+    color:  #FFFFFF;
+}
+nav
+{
+    background-color: #555555;
+    text-align:center;
+}
+nav ul
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+nav ul li
+{
+    display: inline;
+    margin-left: 12px;
+    padding: 5px;
+}
+nav ul li a
+{
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+nav ul li:hover
+{
+    background-color: #999999;
+}
+.tooltip {
+    display: inline;
+    position: relative;
+}
+.tooltip:hover:after{
+    background: #333;
+    background: rgba(0,0,0,.8);
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    content: attr(ctitle);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 220px;
+}
+.tooltip:hover:before{
+    border: solid;
+    border-color: #333 transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 20px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+}
+.content {
+    margin-left:auto;
+    margin-right:auto;
+    width:1000px;
+    text-align:center;
+}
+table {
+    width:100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table tr:nth-child(even) {
+    background-color: #eee;
+}
+table tr:nth-child(odd) {
+   background-color:#fff;
+}
+table th	{
+    background-color: #AAAAAA;
+    color: #FFFFFF;
+}
+
+textarea
+{
+    width: 600px;
+    height: 300px;
+}
+
+td div
+{
+    overflow: scroll;
+    max-width: 300px;
+}
+
