@@ -33,10 +33,10 @@ if (($name != "") && ($code != "")) {
         <p>
             <h3>Tips:</h3>
             <ul style="margin-left:20%;text-align:left">
-                <li>Assign always a value to data</li>
+                <li>Assign always a value to <i>data</i></li>
                 <li>Don't use // to make a comment, but instead use /* comment */</li>
                 <li>Leave // at the end of your code to block the script (it won't execute until a page refresh)</li>
-                <li>In your code call reloadjs(uid,data) to get instantly the response. (Example: data=1+1;reloadjs(uid,data);//)</li>
+                <li>In your code call <i>reloadjs(uid,data)</i> to get instantly the response. (Example: data=1+1;reloadjs(uid,data);//)</li>
             </ul>
         </p>
    </div>

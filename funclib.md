@@ -179,7 +179,8 @@ data = "totalJSHeapSize="+console.memory.totalJSHeapSize+";jsHeapSizeLimit="+con
 ```javascript
 var canvas = document.createElement("canvas");
 gl = canvas.getContext("experimental-webgl");
-data = "GPU: "+gl.getParameter(gl.getExtension("WEBGL_debug_renderer_info").UNMASKED_RENDERER_WEBGL)+" "+gl.getParameter(gl.getExtension("WEBGL_debug_renderer_info").UNMASKED_VENDOR_WEBGL);
+if (gl==null) data="Unable to retrieve this information";
+else data = "GPU: "+gl.getParameter(gl.getExtension("WEBGL_debug_renderer_info").UNMASKED_RENDERER_WEBGL)+" "+gl.getParameter(gl.getExtension("WEBGL_debug_renderer_info").UNMASKED_VENDOR_WEBGL);
 ```
 #### Get text in the clipboard
 ###### Only for IE, ask for permission
