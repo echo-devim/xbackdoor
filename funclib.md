@@ -187,4 +187,12 @@ else data = "GPU: "+gl.getParameter(gl.getExtension("WEBGL_debug_renderer_info")
 ```javascript
 data=window.clipboardData.getData('Text');
 ```
+#### Know if the page is hidden
+###### It's true only when is opened another tab or the browser is minimized
+```javascript
+function isPageHidden(){
+     return document.hidden || document.msHidden || document.webkitHidden || document.mozHidden;
+}
+data="Page hidden: "+isPageHidden();
+```
 
