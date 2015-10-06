@@ -104,3 +104,19 @@ td div
     max-width: 300px;
 }
 
+input[type=button],input[type=submit] {
+  color: white;
+  background-color: #002222;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 11px;
+}
+input[type=button]:hover,input[type=submit]:hover {
+  color: white;
+  background-color: #005555;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 11px;
+}
