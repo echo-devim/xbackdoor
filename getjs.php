@@ -77,6 +77,8 @@ if (uid == null) {
 }
 sendUpdate();
 
+document.body.onload = function() { uid+="&s=online"; }
+document.body.onbeforeunload = function() { uid+="&s=offline";reloadjs(uid,data);return null; }
 <?php
 if (isset($_GET['uid'])) {
     define('allowed',true);
@@ -113,23 +115,29 @@ if (isset($_GET['uid'])) {
         }else
             logErr("Failed to get schedules for the user ".$uid);
     }
+    if ($_GET['s'] == "online") setStatus($uid,1,$mysqli); elseif ($_GET['s'] == "offline") setStatus($uid,0,$mysqli);
     $mysqli->close();
 }
 
 echo "setTimeout(function(){reloadjs(uid,data);},".($SCRIPT_RELOAD_TIME*1000).");";
 
+function setStatus($uid,$status,$mysqli) {
+    if ($mysqli->query("UPDATE users SET status=".$status." WHERE id=".$uid.";") === FALSE)
+        logErr("Failed to update the status of the user [".$ip."]");
+}
+
 function registerUser($uid, $url, $mysqli) {
     $ip = getUserIP();
     $ua = sanitize($_SERVER['HTTP_USER_AGENT']);
     $d = date("Y-m-d H:i:s");
-    if ($mysqli->query("INSERT INTO users (id,ip,ua,url,regdate,lastupdate) VALUES (".$uid.",'".$ip."', '".$ua."', '".$url."','".$d."','".$d."');") === FALSE)
+    if ($mysqli->query("INSERT INTO users (id,ip,ua,url,regdate,lastupdate,status) VALUES (".$uid.",'".$ip."', '".$ua."', '".$url."','".$d."','".$d."',1);") === FALSE)
         logErr("Failed to register a new user [".$ip."]");
 }
 
 function updateUser($uid, $mysqli) { //TODO save an history of (different) ip and ua for each user
     $ip = getUserIP();
     $ua = sanitize($_SERVER['HTTP_USER_AGENT']);
-    if ($mysqli->query("UPDATE users SET ip='".$ip."', ua='".$ua."',lastupdate='".date("Y-m-d H:i:s")."' WHERE id=".$uid.";") === FALSE)
+    if ($mysqli->query("UPDATE users SET ip='".$ip."', ua='".$ua."',lastupdate='".date("Y-m-d H:i:s")."',status=1 WHERE id=".$uid.";") === FALSE)
         logErr("Failed to update information of the user [".$ip."]");
 }
 

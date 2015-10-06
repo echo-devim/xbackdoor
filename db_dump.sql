@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `url` text,
   `regdate` datetime NOT NULL,
   `lastupdate` datetime NOT NULL,
+  `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

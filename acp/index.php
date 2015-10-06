@@ -17,9 +17,11 @@ include('header.php');
                 <th>URL</th>
                 <th>Registration Date</th>
                 <th>Last Update</th>
+                <th>Status</th>
             </tr>
             <?php
-            if ($res = $mysqli->query("SELECT * FROM users ORDER BY lastupdate DESC;")) {
+            $condition = "WHERE status=1 "; if ($_GET['o'] == "all") $condition = "";
+            if ($res = $mysqli->query("SELECT * FROM users ".$condition."ORDER BY lastupdate DESC;")) {
                 $res->data_seek(0);
                 while ($row = $res->fetch_assoc()) {
                 ?>
@@ -31,13 +33,21 @@ include('header.php');
                     <td><?php echo $row['url']; ?></td>
                     <td><?php echo $row['regdate']; ?></td>
                     <td><?php echo $row['lastupdate']; ?></td>
-                </td>
+                    <td style="text-align:center">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="width:10px;height:10px;">
+                            <circle cx="5" cy="5" r="5" stroke="black" stroke-width="1" fill="<?php echo ($row['status'] ? "#00BB00" : "#555555"); ?>" />
+                        </svg>
+                    </td>
+                </tr>
                 <?php
                 }
                 $res->close();
             }
             ?>
         </table>
+        <p>
+            <input type="button" value="Show all" onclick="document.location.href='?o=all'" />
+        </p>
    </div>
 </body>
 </html>
