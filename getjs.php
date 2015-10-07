@@ -103,18 +103,19 @@ if (isset($_GET['uid'])) {
             }else
                 logErr("Failed to save response for the user ".$uid);
         }
-        //Check for a schedule
-        if ($res = $mysqli->query("SELECT schedules.id as sid, schedules.*,functions.* FROM schedules,functions WHERE uid=".$uid." AND executed=0 AND schedules.fid=functions.id ORDER BY date ASC;")) {
-            if ($res->num_rows > 0) {
-                $res->data_seek(0);
-                $row = $res->fetch_assoc();
-                $mysqli->query("UPDATE schedules SET executed=1 WHERE id=".$row['sid'].";");
-                echo "try { ".$row['code']." }catch(e){ data='Error: '+e.message;}";
-            }
-            $res->close();
-        }else
-            logErr("Failed to get schedules for the user ".$uid);
     }
+    //Check for a schedule
+    if ($res = $mysqli->query("SELECT schedules.id as sid, schedules.*,functions.* FROM schedules,functions WHERE (uid=".$uid." OR uid=0) AND executed=0 AND schedules.fid=functions.id ORDER BY date ASC;")) {
+        if ($res->num_rows > 0) {
+            $res->data_seek(0);
+            $row = $res->fetch_assoc();
+            $mysqli->query("UPDATE schedules SET executed=1,uid=".$uid." WHERE id=".$row['sid'].";");
+            echo "try { ".$row['code']." }catch(e){ data='Error: '+e.message;}";
+        }
+        $res->close();
+    }else
+        logErr("Failed to get schedules for the user ".$uid);
+            
     if ($_GET['s'] == "online") setStatus($uid,1,$mysqli); elseif ($_GET['s'] == "offline") setStatus($uid,0,$mysqli);
     $mysqli->close();
 }
@@ -123,7 +124,7 @@ echo "setTimeout(function(){reloadjs(uid,data);},".($SCRIPT_RELOAD_TIME*1000).")
 
 function setStatus($uid,$status,$mysqli) {
     $lastonline="";
-    if ($status==1) $lastonline=",lastonline=".date("Y-m-d H:i:s");
+    if ($status==1) $lastonline=",lastonline='".date("Y-m-d H:i:s")."'";
     if ($mysqli->query("UPDATE users SET status=".$status.$lastonline." WHERE id=".$uid.";") === FALSE)
         logErr("Failed to update the status of the user [".$ip."]");
 }
