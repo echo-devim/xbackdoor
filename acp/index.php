@@ -35,7 +35,17 @@ include('header.php');
                     <td><?php echo $row['lastupdate']; ?></td>
                     <td style="text-align:center">
                         <svg xmlns="http://www.w3.org/2000/svg" style="width:10px;height:10px;">
-                            <circle cx="5" cy="5" r="5" stroke="black" stroke-width="1" fill="<?php echo ($row['status'] ? "#00BB00" : "#555555"); ?>" />
+                            <circle cx="5" cy="5" r="5" stroke="black" stroke-width="1" fill="
+                            <?php
+                            if($row['status']) {
+                                $inactive_time = time() - strtotime($row['lastonline']);
+                                if ($inactive_time > 5*3600) //After 5 hours a client become inactive
+                                   echo "#FF8000\"><title>Inactive. Last time online: ".$row['lastonline']."</title";
+                                else
+                                    echo "#00BB00\"><title>Online since ".$row['lastonline']."</title";
+                            } else
+                                echo "#555555\"><title>Offline. Last time online: ".$row['lastonline']."</title";
+                            ?>"> </circle>
                         </svg>
                     </td>
                 </tr>

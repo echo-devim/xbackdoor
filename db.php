@@ -1,6 +1,7 @@
 <?php
 defined('allowed') or die("Not Found");
 
+date_default_timezone_set('Europe/Paris');
 $mysqli = new mysqli("mysqlhost", "mysqluser", "mysqlpassword", "mysqldatabasename");
 
 /* check connection */

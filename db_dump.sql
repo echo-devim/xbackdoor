@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `regdate` datetime NOT NULL,
   `lastupdate` datetime NOT NULL,
   `status` tinyint(1) NOT NULL,
+  `lastonline` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
