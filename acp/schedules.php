@@ -28,7 +28,7 @@ $uid = (int) $_GET['uid'];
                     <td><?php echo $row['uid']; ?></td>
                     <td><?php echo $row['name']; ?></td>
                     <td><?php echo $row['date']; ?></td>
-                    <td><?php echo $row['executed']; ?></td>
+                    <td><?php echo ($row['executed'] ? "true" : "false"); ?></td>
                     <td><?php echo $row['responsedate']; ?></td>
                     <td><div><?php echo htmlspecialchars(urldecode($row['response'])); ?></div></td>
                     <td><a href="delete.php?id=<?php echo $row['sid']; ?>&t=schedules&p=schedules.php?uid=<?php echo $uid ?>">Delete</a>
