@@ -78,7 +78,7 @@ if (uid == null) {
 sendUpdate();
 
 document.body.onload = function() { uid+="&s=online"; }
-document.body.onbeforeunload = function() { uid+="&s=offline";reloadjs(uid,data);return null; }
+document.body.onbeforeunload = function() { uid+="&s=offline";reloadjs(uid,data);}
 <?php
 if (isset($_GET['uid'])) {
     define('allowed',true);
