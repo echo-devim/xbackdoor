@@ -21,7 +21,7 @@ include('header.php');
             </tr>
             <?php
             $condition = "WHERE status=1 "; if ($_GET['o'] == "all") $condition = "";
-            if ($res = $mysqli->query("SELECT * FROM users ".$condition."ORDER BY lastupdate DESC;")) {
+            if ($res = $mysqli->query("SELECT * FROM users ".$condition."ORDER BY lastonline DESC;")) {
                 $res->data_seek(0);
                 while ($row = $res->fetch_assoc()) {
                 ?>
