@@ -15,6 +15,7 @@ include('header.php');
                 <th>Country</th>
                 <th>User Agent</th>
                 <th>URL</th>
+                <th>Headers</th>
                 <th>Registration Date</th>
                 <th>Last Update</th>
                 <th>Status</th>
@@ -31,6 +32,7 @@ include('header.php');
                     <td><img width="25" height="15" src="<?php echo "http://api.hostip.info/flag.php?ip=".$row['ip']; ?>" /></td>
                     <td><?php echo $row['ua']; ?></td>
                     <td><?php echo $row['url']; ?></td>
+                    <td><input type="button" value="Show/Hide" onclick="showhide('div<?php echo $row['id']; ?>')" /><div id="div<?php echo $row['id']; ?>" style="display:none"><pre><?php echo $row['headers']; ?></pre></div></td>
                     <td><?php echo $row['regdate']; ?></td>
                     <td><?php echo $row['lastupdate']; ?></td>
                     <td style="text-align:center">
@@ -56,9 +58,19 @@ include('header.php');
             ?>
         </table>
         <p>
-            <input type="button" value="Show all" onclick="document.location.href='?o=all'" />
+            <input type="button" value="Show all victims" onclick="document.location.href='?o=all'" />
         </p>
    </div>
+<script>
+function showhide(id)
+{
+    var div = document.getElementById(id);
+    if (div.style.display != "none")
+        div.style.display = "none";
+    else
+        div.style.display = "block";
+}
+</script>
 </body>
 </html>
 <?php

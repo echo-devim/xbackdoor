@@ -1,4 +1,5 @@
 <?php
+if (isset($_GET['test'])) exit("alert(1);"); //Testing
 /** CONFIGURATION **/
 $SCRIPT_RELOAD_TIME = 6; //in seconds. This time represent the interval for the polling (from the client to the server).
 $LOG_PATH = 'log.txt'; //Change this name and put the log in a protect folder
@@ -132,19 +133,28 @@ function setStatus($uid,$status,$mysqli) {
 function registerUser($uid, $url, $mysqli) {
     $ip = getUserIP();
     $ua = sanitize($_SERVER['HTTP_USER_AGENT']);
+    $hd = getHeaders();
     $d = date("Y-m-d H:i:s");
-    if ($mysqli->query("INSERT INTO users (id,ip,ua,url,regdate,lastupdate,status,lastonline) VALUES (".$uid.",'".$ip."', '".$ua."', '".$url."','".$d."','".$d."',1,'".$d."');") === FALSE)
+    if ($mysqli->query("INSERT INTO users (id,ip,ua,url,regdate,lastupdate,status,lastonline,headers) VALUES (".$uid.",'".$ip."', '".$ua."', '".$url."','".$d."','".$d."',1,'".$d."','".$hd."');") === FALSE)
         logErr("Failed to register a new user [".$ip."]");
 }
 
 function updateUser($uid, $mysqli) { //TODO save an history of (different) ip and ua for each user
     $ip = getUserIP();
     $ua = sanitize($_SERVER['HTTP_USER_AGENT']);
+    $hd = getHeaders();
     $d = date("Y-m-d H:i:s");
-    if ($mysqli->query("UPDATE users SET ip='".$ip."', ua='".$ua."',lastupdate='".$d."',status=1,lastonline='".$d."' WHERE id=".$uid.";") === FALSE)
+    if ($mysqli->query("UPDATE users SET ip='".$ip."', ua='".$ua."',lastupdate='".$d."',status=1,lastonline='".$d."',headers='".$hd."' WHERE id=".$uid.";") === FALSE)
         logErr("Failed to update information of the user [".$ip."]");
 }
 
+function getHeaders() {
+    $headers="";
+    foreach (getallheaders() as $name => $value) {
+        $headers .= sanitize("$name: $value\n");
+    }
+    return $headers;
+}
 
 function getUserIP() {
     if( array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) && !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ) {
