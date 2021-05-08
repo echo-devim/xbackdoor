@@ -5,9 +5,6 @@ X-Backdoor is a tool to take advantage of a persistent XSS vulnerability. The id
 ### Version
 1.0
 
-### Author
-BlackJolly ( *blackjolly [at] live.com* )
-
 ### Screenshots
 ![screen1](https://raw.githubusercontent.com/BlackEmpire/xbackdoor/master/screenshots/screen1.png "Screen 1")
 ![screen2](https://raw.githubusercontent.com/BlackEmpire/xbackdoor/master/screenshots/screen2.png "Screen 2")
